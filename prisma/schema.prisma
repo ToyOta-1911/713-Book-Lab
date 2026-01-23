@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model booklist {
+  id                 Int           @id @default(autoincrement())
+  book_title         String
+  isbn               String
+  category           String
+  author_name        String
+  author_affiliation String
+  member_code        String
+  member_name        String
+  phone              String
+  borrow_date        DateTime
+  due_date           DateTime
+  returned_date      DateTime
+  organizerId        Int?
+  organizer          organizer?    @relation(fields: [organizerId], references: [id])
+  participants       participant[]
+}
+
+model organizer {
+  id       Int        @id @default(autoincrement())
+  name     String
+  booklist booklist[]
+}
+
+model participant {
+  id       Int        @id @default(autoincrement())
+  name     String
+  email    String
+  booklist booklist[]
+}

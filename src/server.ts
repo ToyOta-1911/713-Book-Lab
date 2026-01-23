@@ -42,7 +42,8 @@ app.get("/BookList", (req, res) => {
 });
 app.get("/BookList/:id", (req, res) => {
     const id = parseInt(req.params.id);
-   getEventById(id)
+    // @ts-ignore
+    getEventById(id)
        .then((booklist: Booklist | undefined) => {
            if (booklist) {
                res.json(booklist);
