@@ -44,15 +44,8 @@ export function getAllEventsWithOrganizer() {
     include: {
       organizer: {
         select: {
-          name: true,
-        },
-      },
-      participants: {
-        select: {
           id: true,
           name: true,
-          email: true,
-          booklist: true,
         },
       },
     },
